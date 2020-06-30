@@ -40,5 +40,5 @@ The file can be specified in python/test_tvgen_cfg.py as well as the number of e
 ````
 cmsRun python/test_tvgen_cfg.py
 ````
-Then use the output.root file in the scripts here () to generate RCT TV
+Then use the output.root file in the scripts here: [tvgen](https://github.com/ekoenig4/CMSPhase2RCT/tree/master/tvgen) to generate RCT TV
 
