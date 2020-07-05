@@ -138,6 +138,12 @@
 // class declaration
 //
 
+// Stage2
+#include "DataFormats/L1Trigger/interface/BXVector.h"
+#include "DataFormats/L1Trigger/interface/Jet.h"
+#include "DataFormats/L1Trigger/interface/Tau.h"
+#include "DataFormats/L1Trigger/interface/L1Candidate.h"
+
 // If the analyzer does not use TFileService, please remove
 // the template argument to the base class so the class inherits
 // from  edm::one::EDAnalyzer<>
@@ -168,6 +174,8 @@ private:
   vector<int> crystalEta;
   vector<int> crystalPhi;
 
+  float crystalCut;
+  
   edm::EDGetTokenT<EcalEBTrigPrimDigiCollection> ecalTPEBToken_;
   edm::EDGetTokenT< edm::SortedCollection<HcalTriggerPrimitiveDigi> > hcalTPToken_;
   edm::ESHandle<CaloTPGTranscoder> decoder_;
@@ -192,6 +200,7 @@ private:
 //
 CrystalAnalyzer::CrystalAnalyzer(const edm::ParameterSet& iConfig)
   :
+  crystalCut(iConfig.getUntrackedParameter<double>("crystalCut", 50)),
   ecalTPEBToken_(consumes<EcalEBTrigPrimDigiCollection>(iConfig.getParameter<edm::InputTag>("ecalTPEB"))),
   hcalTPToken_(consumes< edm::SortedCollection<HcalTriggerPrimitiveDigi> >(iConfig.getParameter<edm::InputTag>("hcalTP")))
 {
@@ -247,12 +256,15 @@ CrystalAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
   
   // Get all the ECAL hits
   iEvent.getByToken(ecalTPEBToken_,pcalohits);
+  float max_et = 0;
   for (auto& hit : *pcalohits.product()) {
     auto& id = hit.id();
     
     float et = hit.encodedEt()/8.; // Et is 10 bit, by keeping the ADC saturation Et at 120 GeV it means that you have to divide by 8
     int ieta = id.ieta();
     int iphi = id.iphi();
+
+    if ( et > max_et ) max_et = et;
     
     crystalEt.push_back(et);
     crystalEta.push_back(ieta);
@@ -260,7 +272,8 @@ CrystalAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
     nCrystal++;
   }
 
-  tree->Fill();
+  if (max_et > crystalCut)
+    tree->Fill();
 }
 
 
