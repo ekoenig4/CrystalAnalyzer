@@ -53,7 +53,7 @@ process.L1simulation_step = cms.Path(process.SimL1Emulator)
 process.load('L1Trigger.TrackFindingTracklet.L1TrackletTracks_cff')
 process.L1TrackTriggerTracklet_step = cms.Path(process.L1TrackletTracksWithAssociators)
 
-process.analyzer= cms.EDAnalyzer('CrystalAnalyzer',
+process.analyzer= cms.EDAnalyzer('TVGenAnalyzer',
                                  crytsalCut = cms.untracked.double(50),
                                  ecalTPEB = cms.InputTag("simEcalEBTriggerPrimitiveDigis","","HLT"),
                                  hcalTP = cms.InputTag("simHcalTriggerPrimitiveDigis","","HLT"),

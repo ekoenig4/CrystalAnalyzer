@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    L1Trigger/CrystalAnalyzer
-// Class:      CrystalAnalyzer
+// Package:    L1Trigger/TVGenAnalyzer
+// Class:      TVGenAnalyzer
 //
-/**\class CrystalAnalyzer CrystalAnalyzer.cc L1Trigger/CrystalAnalyzer/plugins/CrystalAnalyzer.cc
+/**\class TVGenAnalyzer TVGenAnalyzer.cc L1Trigger/TVGenAnalyzer/plugins/TVGenAnalyzer.cc
 
    Description: [one line class summary]
 
@@ -152,10 +152,10 @@
 
 using reco::TrackCollection;
 
-class CrystalAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
+class TVGenAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
 public:
-  explicit CrystalAnalyzer(const edm::ParameterSet&);
-  ~CrystalAnalyzer();
+  explicit TVGenAnalyzer(const edm::ParameterSet&);
+  ~TVGenAnalyzer();
 
   static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
@@ -198,7 +198,7 @@ private:
 //
 // constructors and destructor
 //
-CrystalAnalyzer::CrystalAnalyzer(const edm::ParameterSet& iConfig)
+TVGenAnalyzer::TVGenAnalyzer(const edm::ParameterSet& iConfig)
   :
   crystalCut(iConfig.getUntrackedParameter<double>("crystalCut", 50)),
   ecalTPEBToken_(consumes<EcalEBTrigPrimDigiCollection>(iConfig.getParameter<edm::InputTag>("ecalTPEB"))),
@@ -213,7 +213,7 @@ CrystalAnalyzer::CrystalAnalyzer(const edm::ParameterSet& iConfig)
    tree->Branch("crystal_iPhi",&crystalPhi);
 }
 
-void CrystalAnalyzer::initTree() {
+void TVGenAnalyzer::initTree() {
   nCrystal = 0;
   crystalEt.clear();
   crystalEta.clear();
@@ -221,7 +221,7 @@ void CrystalAnalyzer::initTree() {
 }
 
 
-CrystalAnalyzer::~CrystalAnalyzer()
+TVGenAnalyzer::~TVGenAnalyzer()
 {
 
   // do anything here that needs to be done at desctruction time
@@ -236,7 +236,7 @@ CrystalAnalyzer::~CrystalAnalyzer()
 
 // ------------ method called for each event  ------------
 void
-CrystalAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+TVGenAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
   using namespace edm;
   
@@ -279,19 +279,19 @@ CrystalAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
 
 // ------------ method called once each job just before starting event loop  ------------
 void
-CrystalAnalyzer::beginJob()
+TVGenAnalyzer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
 void
-CrystalAnalyzer::endJob()
+TVGenAnalyzer::endJob()
 {
 }
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
 void
-CrystalAnalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+TVGenAnalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
   //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
@@ -306,4 +306,4 @@ CrystalAnalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) 
 }
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(CrystalAnalyzer);
+DEFINE_FWK_MODULE(TVGenAnalyzer);
