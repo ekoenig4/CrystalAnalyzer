@@ -12,22 +12,18 @@ git cms-merge-topic -u cms-l1t-offline:l1t-phase2-v2.17.15.1
 git cms-addpkg L1Trigger/L1TCommon
 
 scram b -j 8
-````
-More information can be found here
-https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TPhase2Instructions#CMSSW_10_5_0_pre1
 
-## Step-2: Tyler's Jet Algorithm (with some minor edits)
-````
 cd $CMSSW_BASE/src
 git remote add ekoenig4 git@github.com:ekoenig4/cmssw.git
-git fetch ekoenig4 from-CMSSW_10_5_0_pre1
-git cms-merge-topic -u ekoenig4:from-CMSSW_10_5_0_pre1
+git fetch ekoenig4 phase2-l1t-offline-for-tvgen
+git cms-merge-topic -u ekoenig4:phase2-l1t-offline-for-tvgen
 scram b -j 8
 ````
 More information can be found here
+https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TPhase2Instructions#CMSSW_10_5_0_pre1
 https://twiki.cern.ch/twiki/bin/viewauth/CMS/Phase2L1CaloJetsAndTaus#Central_Integration_Branch
 
-## Step-3: Phase 2 Jet Algorithm Code
+## Step-2: Phase 2 Jet Algorithm Code
 ````
 cd $CMSSW_BASE/src/L1Trigger/
 git clone https://github.com/ekoenig4/TVGenAnalyzer
