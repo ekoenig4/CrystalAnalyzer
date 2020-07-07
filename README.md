@@ -15,8 +15,7 @@ scram b -j 8
 
 cd $CMSSW_BASE/src
 git remote add ekoenig4 git@github.com:ekoenig4/cmssw.git
-git fetch ekoenig4 phase2-l1t-offline-for-tvgen
-git cms-merge-topic -u ekoenig4:phase2-l1t-offline-for-tvgen
+git checkout ekoenig4/phase2-l1t-offline-for-tvgen
 scram b -j 8
 ````
 More information can be found here
