@@ -16,12 +16,12 @@ scram b -j 8
 More information can be found here
 https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TPhase2Instructions#CMSSW_10_5_0_pre1
 
-## Step-2: Tyler's Jet Algorithm
+## Step-2: Tyler's Jet Algorithm (with some minor edits)
 ````
 cd $CMSSW_BASE/src
-git remote add truggles git@github.com:truggles/cmssw.git
-git fetch truggles phase2-l1taus_10_5_Xv2
-git cms-merge-topic -u truggles:phase2-l1taus_10_5_X_Apr26
+git remote add ekoenig4 git@github.com:ekoenig4/cmssw.git
+git fetch ekoenig4 from-CMSSW_10_5_0_pre1
+git cms-merge-topic -u ekoenig4:from-CMSSW_10_5_0_pre1
 scram b -j 8
 ````
 More information can be found here
