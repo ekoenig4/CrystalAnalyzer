@@ -31,7 +31,7 @@ scram b -j 8
 ````
 
 ## Getting Crystal Information
-The file can be specified in python/test_tvgen_cfg.py as well as the number of events to run over.
+The file can be specified in test/run_tvgen.py as well as the number of events to run over.
 ````
 cmsRun test/run_tvgen.py
 ````
